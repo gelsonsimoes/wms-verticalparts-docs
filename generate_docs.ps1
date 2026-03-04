@@ -1,5 +1,5 @@
 # ═══════════════════════════════════════════════════════════════
-#  SCRIPT DE GERAÇÃO AUTOMÁTICA - CORREÇÃO DE ENCODING (UTF-8)
+#  SCRIPT DE GERAÇÃO AUTOMÁTICA - CORREÇÃO DE LINKS E ENCODING
 # ═══════════════════════════════════════════════════════════════
 
 $baseDir = $PSScriptRoot
@@ -93,7 +93,6 @@ foreach ($pag in $paginas) {
     $dir = Split-Path $fullPath
     if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
 
-    # Geramos todas as páginas com o template correto e codificação forçada
     $html = @"
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -110,7 +109,7 @@ foreach ($pag in $paginas) {
     <a href="../../index.html">Início</a>
     <a href="../02-operar/recebimento.html">Operação</a>
     <a href="../mobile/login.html">Mobile</a>
-    <a href="https://github.com/gelsonsimoes/wms-verticalparts" target="_blank">GitHub</a>
+    <a href="https://www.wmsverticalparts.com.br" target="_blank">Site Oficial</a>
   </nav>
 </header>
 <div class="layout">
@@ -233,14 +232,11 @@ foreach ($pag in $paginas) {
   </main>
 </div>
 <footer>
-  <p>WMS VerticalParts Docs — Atualizado a cada versão</p>
+  <p>WMS VerticalParts Docs — Atualizado a cada versão — <a href="https://www.wmsverticalparts.com.br" target="_blank">wmsverticalparts.com.br</a></p>
 </footer>
 <script src="../../assets/js/main.js"></script>
 </body>
 </html>
 "@
-    # Forçamos a escrita em UTF-8 SEM BOM para evitar caracteres estranhos no navegador
     [System.IO.File]::WriteAllText($fullPath, $html, $utf8NoBom)
 }
-
-Write-Host "✨ Páginas corrigidas com UTF-8 PURO!" -ForegroundColor Green
