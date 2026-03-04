@@ -1,8 +1,5 @@
 import os
-
-# Known good strings
-HEADER_OLD_GHS = '<a href="https://github.com/gelsonsimoes/wms-verticalparts" target="_blank">GitHub</a>'
-HEADER_NEW = '<a href="https://www.wmsverticalparts.com.br" target="_blank">Site Oficial</a>'
+import re
 
 SIDEBAR_CONTENT = """
     <div class="group-title">Principal</div>
@@ -97,88 +94,43 @@ SIDEBAR_CONTENT = """
     <a href="../mobile/remanejamento.html">Remanejamento</a>
 """
 
-import re
-
 def fix_file(path):
-    print(f"Fixing: {path}")
-    # Read as binary to handle any encoding
     with open(path, 'rb') as f:
         content = f.read()
-    
-    # Try to decode safely
     try:
         text = content.decode('utf-8')
     except:
         text = content.decode('latin-1')
-        
-    # Replace header links
-    text = re.sub(r'<a href="[^"]*github\.com/[^"]*"[^>]*>GitHub</a>', HEADER_NEW, text)
+
+    # Replace header links and common icons
     text = re.sub(r'InÃ­cio', 'Início', text)
     text = re.sub(r'OperaÃ§Ã£o', 'Operação', text)
     
-    # Replace sidebar entirely if found
+    # Replace sidebar entirely
     sidebar_pattern = r'<nav class="sidebar">.*?</nav>'
     new_sidebar = f'<nav class="sidebar">{SIDEBAR_CONTENT}</nav>'
     text = re.sub(sidebar_pattern, new_sidebar, text, flags=re.DOTALL)
     
-    # Fix common title/content mangling
-    text = text.replace('Manual do UsuÃ¡rio', 'Manual do Usuário')
-    text = text.replace('OperaÃ§Ã£o', 'Operação')
-    text = text.replace('Ã§Ã£o', 'ção')
-    text = text.replace('mÃ³dulo', 'módulo')
-    text = text.replace('pÃ¡gina', 'página')
-    text = text.replace('alteraÃ§Ãµes', 'alterações')
-    text = text.replace('InÃ­cio', 'Início')
-    text = text.replace('â€”', '—')
-    text = text.replace('âœ“', '✓')
-    text = text.replace('ðŸ’¡', '💡')
-    text = text.replace('InÃcio', 'Início')
-    text = text.replace('UsuÃ¡rio', 'Usuário')
-    text = text.replace('ConfiguraÃ§Ãµes', 'Configurações')
-    text = text.replace('AlocaÃ§Ã£o', 'Alocação')
-    text = text.replace('IntegraÃ§Ã£o', 'Integração')
-    text = text.replace('SaÃ­da', 'Saída')
-    text = text.replace('EstaÃ§Ã£o', 'Estação')
-    text = text.replace('ServiÃ§o', 'Serviço')
-    text = text.replace('GestÃ£o', 'Gestão')
-    text = text.replace('RodoviÃ¡ria', 'Rodoviária')
-    text = text.replace('SeparaÃ§Ã£o', 'Separação')
-    text = text.replace('InventÃ¡rio', 'Inventário')
-    text = text.replace('ArmazÃ©m', 'Armazém')
-    text = text.replace('DiÃ¡rias', 'Diárias')
-    text = text.replace('ArmazÃ©ns', 'Armazéns')
-    text = text.replace('EndereÃ§os', 'Endereços')
-    text = text.replace('CatÃ¡logo', 'Catálogo')
-    text = text.replace('VeÃ­culos', 'Veículos')
-    text = text.replace('Ã reas', 'Áreas')
-    text = text.replace('OcupaÃ§Ã£o', 'Ocupação')
-    text = text.replace('BalanÃ§as', 'Balanças')
-    text = text.replace('SeguranÃ§a', 'Segurança')
-    text = text.replace('UsuÃ¡rios', 'Usuários')
-    text = text.replace('RÃ¡pida', 'Rápida')
+    # Clean up mangled characters
+    repls = {
+        'Ã©': 'é', 'Ã¡': 'á', 'Ã­': 'í', 'Ã³': 'ó', 'Ãº': 'ú',
+        'Ã ': 'à', 'Ã£': 'ã', 'Ãµ': 'õ', 'Ãª': 'ê', 'Ã¢': 'â',
+        'Ã§': 'ç', 'â€”': '—', 'âœ“': '✓', 'ðŸ’¡': '💡',
+        'versÃ£o': 'versão', 'Manual do UsuÃ¡rio': 'Manual do Usuário',
+        'OperaÃ§Ã£o': 'Operação', 'mÃ³dulo': 'módulo', 'pÃ¡gina': 'página'
+    }
+    for old, new in repls.items():
+        text = text.replace(old, new)
+        
+    # Replace GitHub link everywhere
+    text = re.sub(r'https://github.com/[^"]*', 'https://www.wmsverticalparts.com.br', text)
+    text = text.replace('GitHub', 'Site Oficial')
     
-    # Fix specific modules mentioned in screenshots
-    text = text.replace('Recebimento â€”', 'Recebimento —')
-    text = text.replace('Docas â€”', 'Docas —')
-
-    # Remove the GitHub link from footer as well
-    text = re.sub(r' — <a href="https://github.com/[^"]*" target="_blank">GitHub Web</a>', '', text)
-    text = re.sub(r' — <a href="https://github.com/[^"]*" target="_blank">GitHub Mobile</a>', '', text)
-    
-    # Replace footer links
-    text = text.replace('wms-verticalparts-docs — Atualizado a cada versão — Site Oficial — Site Oficial', 'WMS VerticalParts Docs — Atualizado a cada versão — <a href="https://www.wmsverticalparts.com.br" target="_blank">wmsverticalparts.com.br</a>')
-
     with open(path, 'w', encoding='utf-8') as f:
         f.write(text)
 
-# Fix root files
-for file in os.listdir('c:/Users/gelso/Projetos_Antigravity/wms_blog_verticalparts/wms-verticalparts-docs'):
-    if file.endswith('.html'):
-        fix_file(os.path.join('c:/Users/gelso/Projetos_Antigravity/wms_blog_verticalparts/wms-verticalparts-docs', file))
-
-# Fix paginas
-for root, dirs, files in os.walk('c:/Users/gelso/Projetos_Antigravity/wms_blog_verticalparts/wms-verticalparts-docs/paginas'):
+# Run for all html files
+for root, dirs, files in os.walk('c:/Users/gelso/Projetos_Antigravity/wms_blog_verticalparts/wms-verticalparts-docs'):
     for file in files:
         if file.endswith('.html'):
             fix_file(os.path.join(root, file))
-print("Done!")
