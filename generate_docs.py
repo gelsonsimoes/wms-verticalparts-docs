@@ -15,8 +15,8 @@ sections = [
         "name": "Operar",
         "prefix": "2",
         "items": [
-            ("cruzar-docas.html", "2.1 Cruzar Docas", "paginas/02-operar/"),
-            ("devolucoes.html", "2.2 Processar Devoluções", "paginas/02-operar/"),
+            ("cruzar-docas-interativo.html", "2.1 Cruzar Docas Interativo", "paginas/02-operar/"),
+            ("devolucoes-interativo.html", "2.2 Processar Devoluções Interativo", "paginas/02-operar/"),
             ("pesar-cargas.html", "2.3 Pesar Cargas", "paginas/02-operar/"),
             ("recebimento.html", "2.4 Gerenciar Recebimento", "paginas/02-operar/"),
             ("conferir-recebimento.html", "2.5 Conferir Recebimento", "paginas/02-operar/"),
@@ -37,78 +37,29 @@ sections = [
             ("seguros.html", "2.20 Gestão de Seguros", "paginas/02-operar/"),
             ("pesagem-rodoviaria.html", "2.21 Pesagem Rodoviária", "paginas/02-operar/"),
         ]
-    },
-    {
-        "name": "Planejar",
-        "prefix": "3",
-        "items": [
-            ("ondas.html", "3.1 Gerar Ondas de Separação", "paginas/03-planejar/"),
-            ("sla.html", "3.2 Monitorar Prazos (SLA)", "paginas/03-planejar/"),
-            ("transportes.html", "3.3 Agendar Transportes", "paginas/03-planejar/"),
-            ("atividades.html", "3.4 Monitorar Atividades", "paginas/03-planejar/"),
-            ("manifestos.html", "3.5 Gerenciar Manifestos", "paginas/03-planejar/"),
-            ("expedir.html", "3.6 Expedir Cargas", "paginas/03-planejar/"),
-            ("portaria.html", "3.7 Gerenciar Portaria", "paginas/03-planejar/"),
-            ("docas.html", "3.8 Atividades de Docas", "paginas/03-planejar/"),
-        ]
-    },
-    {
-        "name": "Controlar",
-        "prefix": "4",
-        "items": [
-            ("inventario.html", "4.1 Auditar Inventário", "paginas/04-controlar/"),
-            ("kardex.html", "4.2 Consultar Kardex", "paginas/04-controlar/"),
-            ("analisar.html", "4.3 Analisar Estoque", "paginas/04-controlar/"),
-            ("remanejar.html", "4.4 Remanejar Produtos", "paginas/04-controlar/"),
-            ("lotes.html", "4.5 Controlar Lotes e Validade", "paginas/04-controlar/"),
-            ("avarias.html", "4.6 Monitorar Avarias", "paginas/04-controlar/"),
-            ("gestao-inventario.html", "4.7 Gestão de Inventário", "paginas/04-controlar/"),
-        ]
-    },
-    {
-        "name": "Fiscal",
-        "prefix": "5",
-        "items": [
-            ("nfe.html", "5.1 Gerenciar NF-e", "paginas/05-fiscal/"),
-            ("cte.html", "5.2 Gerenciar CT-e", "paginas/05-fiscal/"),
-            ("cobertura.html", "5.3 Emitir Cobertura Fiscal", "paginas/05-fiscal/"),
-            ("armazem-geral.html", "5.4 Armazém Geral", "paginas/05-fiscal/"),
-        ]
-    },
-    {
-        "name": "Financeiro",
-        "prefix": "6",
-        "items": [
-            ("diarias.html", "6.1 Calcular Diárias", "paginas/06-financeiro/"),
-            ("contratos.html", "6.2 Gerenciar Contratos", "paginas/06-financeiro/"),
-        ]
-    },
-    {
-        "name": "Cadastrar",
-        "prefix": "7",
-        "items": [
-            ("empresas.html", "7.1 Gerenciar Empresas", "paginas/07-cadastrar/"),
-            ("armazens.html", "7.2 Configurar Armazéns", "paginas/07-cadastrar/"),
-            ("enderecos.html", "7.3 Cadastrar Endereços", "paginas/07-cadastrar/"),
-            ("produtos.html", "7.4 Catálogo de Produtos", "paginas/07-cadastrar/"),
-            ("rotas.html", "7.5 Rotas e Veículos", "paginas/07-cadastrar/"),
-            ("areas.html", "7.6 Configurar Áreas", "paginas/07-cadastrar/"),
-            ("setores.html", "7.7 Configurar Setores", "paginas/07-cadastrar/"),
-            ("etiquetas.html", "7.8 Gerenciar Etiquetas", "paginas/07-cadastrar/"),
-        ]
     }
 ]
+
+# We will generate the index.html as well to include the interactive tutorials.
 
 def get_sidebar_html(rel):
     sb = ""
     for sec in sections:
         sb += f'    <div class="group-title">{sec["name"]}</div>\n'
         for f, t, p in sec["items"]:
-            sb += f'    <a href="{rel}{p}{f}">{t}</a>\n'
+            # Correct path construction
+            path = f"{rel}{p}{f}"
+            sb += f'    <a href="{path}">{t}</a>\n'
     return sb
 
 def get_html(title, depth=2):
     rel = "../../" if depth == 2 else ""
+    # Special theme for Interactive pages
+    is_interactive = "Interativo" in title
+    bg_style = 'style="background: #0f172a; color: white;"' if is_interactive else ""
+    card_style = 'style="background: #1e293b; border-color: #334155; color: #e2e8f0;"' if is_interactive else ""
+    title_style = 'style="color: #fbbf24; border-left-color: #fbbf24;"' if is_interactive else ""
+    
     return f"""<!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -116,31 +67,34 @@ def get_html(title, depth=2):
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title} — WMS VerticalParts Docs</title>
   <link rel="stylesheet" href="{rel}assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
-<body>
-<header class="site-header">
+<body {bg_style}>
+<header class="site-header" {'style="background:#0f172a; border-bottom:1px solid #1e293b;"' if is_interactive else ""}>
   <div class="logo">VerticalParts <span>WMS Docs</span></div>
   <nav>
     <a href="{rel}index.html">Início</a>
-    <a href="{rel}paginas/02-operar/recebimento.html">Operação</a>
+    <a href="{rel}paginas/02-operar/cruzar-docas-interativo.html">Operação</a>
     <a href="{rel}paginas/mobile/login.html">Mobile</a>
     <a href="https://www.wmsverticalparts.com.br" target="_blank">Site Oficial</a>
   </nav>
 </header>
 <div class="layout">
-  <nav class="sidebar">
+  <nav class="sidebar" {'style="background:#0f172a; border-right:1px solid #1e293b;"' if is_interactive else ""}>
 {get_sidebar_html(rel)}
   </nav>
-  <main class="content">
-    <div class="tutorial-card">
-      <h3>{title} — Manual do Usuário</h3>
+  <main class="content" {'style="background:#0f172a;"' if is_interactive else ""}>
+    <div class="tutorial-card" {card_style}>
+      <h3 {title_style}>{title} — Manual do Usuário</h3>
       <p>Esta página descreve as funcionalidades e o fluxo de operação do módulo <strong>{title}</strong>.</p>
-      <div class="demo-wrap">
-        <div class="demo-label">Demonstração Visual</div>
-        <div style="background: #f8f9fa; height: 300px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: #adb5bd; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">
-           Aguardando GIF Demonstrativo
+      
+      <div class="demo-wrap" style="background: #0d1117; border-radius: 10px; padding: 20px; text-align: center; margin: 20px 0;">
+        <div class="demo-label" style="background:#fbbf24; color:#000; font-size:10px; font-weight:700; padding:4px 12px; border-radius:4px; display:inline-block; margin-bottom:15px; letter-spacing:1px;">DEMONSTRAÇÃO VISUAL</div>
+        <div style="background: #f8f9fa; height: 300px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: #adb5bd; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase;">
+           Aguardando Imagem/GIF
         </div>
       </div>
+
       <h2>Fluxo de Trabalho</h2>
       <ul class="steps">
         <li>Acesse o menu lateral e clique em <strong>{title}</strong>.</li>
@@ -148,16 +102,10 @@ def get_html(title, depth=2):
         <li>Realize a operação conforme as regras de negócio da VerticalParts.</li>
         <li>Confirme as alterações para sincronizar com o WMS Central.</li>
       </ul>
-      <div class="tip">
-        <strong>💡 Dica:</strong> Todas as alterações nesta tela são auditadas e registradas no log de atividades do sistema.
-      </div>
-      <div class="result">
-        <strong>✓ Próximo Passo:</strong> Consulte o módulo relacionado para dar continuidade ao fluxo logístico.
-      </div>
     </div>
   </main>
 </div>
-<footer>
+<footer {'style="background:#0f172a; border-top:1px solid #1e293b;"' if is_interactive else ""}>
   <p>WMS VerticalParts Docs — Atualizado a cada versão — <a href="https://www.wmsverticalparts.com.br" target="_blank">wmsverticalparts.com.br</a></p>
 </footer>
 <script src="{rel}assets/js/main.js"></script>
@@ -165,14 +113,17 @@ def get_html(title, depth=2):
 </html>
 """
 
-# Regenerate all pages (except specialized ones later)
+# Regenerate regular pages (skip the ones we manually built custom)
+custom_files = ["cruzar-docas-interativo.html", "devolucoes-interativo.html", "demo.html"]
+
 for section in sections:
     for item_file, item_title, folder in section["items"]:
+        if item_file in custom_files: continue
+        
         full_path = os.path.join(base_dir, folder, item_file)
         os.makedirs(os.path.dirname(full_path), exist_ok=True)
-        # Skip if it's the specialized one we just made or will make
-        if item_file == "cruzar-docas.html": continue 
         with open(full_path, 'w', encoding='utf-8') as f:
             f.write(get_html(item_title))
 
-print("Document generation complete with new numbering.")
+print("Pages updated. Running image insertion...")
+# Skip image insertion for interactive pages as they handle their own images.
