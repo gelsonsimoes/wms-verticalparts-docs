@@ -13,16 +13,18 @@
     .sidebar { background: #0f172a; border-right: 1px solid #1e293b; }
     .content { background: #0f172a; }
     .tutorial-card { background: #1e293b; color: #e2e8f0; border: 1px solid #334155; }
-    .tutorial-card h3 { color: #fbbf24; border-left-color: #fbbf24; }
-    .accordion-item { background: #0f172a; border-color: #334155; margin-bottom: 8px; }
-    .accordion-header { color: #f1f5f9; padding: 1rem; font-size: 0.9rem; }
-    .accordion-content { color: #94a3b8; padding: 0 1rem 1rem 3rem; font-size: 0.85rem; }
-    .accordion-item.active { border-color: #fbbf24; }
-    .sub-item { padding: 5px 10px; cursor: pointer; border-radius: 4px; transition: 0.2s; display: block; margin-top: 5px; }
-    .sub-item:hover { background: rgba(251, 191, 36, 0.1); color: #fbbf24; }
-    
-    /* Custom Cursor for this page */
-    #ghost-cursor { pointer-events: none; z-index: 1000; }
+    .tutorial-card > h3 { color: #fbbf24; border-left-color: #fbbf24; }
+    .sub-item { 
+      padding: 8px 12px; cursor: pointer; border-radius: 8px; 
+      transition: 0.25s; display: block; margin-top: 6px; 
+      background: rgba(255,255,255,0.03); border: 1px solid transparent;
+      font-size: 0.9rem;
+    }
+    .sub-item:hover { 
+      background: rgba(251, 191, 36, 0.12); color: #fbbf24; 
+      border-color: rgba(251, 191, 36, 0.3);
+      transform: translateX(5px);
+    }
   </style>
 </head>
 <body>
@@ -35,85 +37,154 @@
 </header>
 <div class="layout">
   <nav class="sidebar">
+    <div class="group-title">Principal</div>
+    <a href="../../paginas/01-principal/dashboard.html">1.1 Dashboard Geral</a>
     <div class="group-title">Operar</div>
     <a href="cruzar-docas-interativo.html">2.1 Cruzar Docas</a>
     <a href="devolucoes-interativo.html" class="active">2.2 Processar Devoluções</a>
+    <a href="pesar-cargas.html">2.3 Pesar Cargas</a>
+    <a href="recebimento.html">2.4 Gerenciar Recebimento</a>
+    <a href="conferir-recebimento.html">2.5 Conferir Recebimento</a>
+    <a href="mapa-alocacao.html">2.6 Gerar Mapa de Alocação</a>
+    <a href="conferencia-cega.html">2.7 Conferência Cega</a>
+    <a href="alocar-estoque.html">2.8 Alocar Estoque</a>
+    <a href="kanban.html">2.9 Kanban de Alocação</a>
+    <a href="separar-pedidos.html">2.10 Separar Pedidos</a>
+    <a href="embalar.html">2.11 Embalar Pedidos</a>
+    <a href="saida.html">2.12 Monitorar Saída</a>
+    <a href="checkin.html">2.13 Check-in Recebimento</a>
+    <a href="kits.html">2.14 Estação de Kits</a>
+    <a href="colmeia.html">2.15 Conferência Colmeia</a>
+    <a href="mapa-visual.html">2.16 Mapa Visual Estoque</a>
+    <a href="buffer1.html">2.17 Buffer 1</a>
+    <a href="buffer2.html">2.18 Buffer 2</a>
+    <a href="ordem-servico.html">2.19 Ordem de Serviço</a>
+    <a href="seguros.html">2.20 Gestão de Seguros</a>
+    <a href="pesagem-rodoviaria.html">2.21 Pesagem Rodoviária</a>
   </nav>
   <main class="content">
     <div class="tutorial-card">
-      <div class="breadcrumb" style="color: #64748b;">Manual Interativo > Operação</div>
+      <div class="breadcrumb" style="color: #64748b; margin-bottom: 10px;">Manual Interativo > Operação > Logística Reversa</div>
       <h3 style="font-weight: 900; letter-spacing: -1px; font-size: 2.5rem;">2.2 PROCESSAR DEVOLUÇÕES — AULA INTERATIVA</h3>
-      <p style="font-size: 1.1rem; opacity: 0.8;">Explore as áreas técnicas de triagem e logística reversa passando o mouse sobre os tópicos.</p>
+      <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 2rem;">Explore cada área da tela passando o mouse nos tópicos abaixo. O cursor dourado simulará a ação correspondente na imagem.</p>
       
       <div class="tutorial-grid">
-        <!-- Coluna Esquerda: Teoria -->
-        <div class="accordion">
-          
-          <div class="accordion-item active" data-id="toolbar">
-            <div class="accordion-header"><span class="step-num">1</span> Barra de Ferramentas e Filtros</div>
-            <div class="accordion-content">
-              Controle o estado das devoluções e realize ações em lote.
-              <span class="sub-item" data-pos='{"x":"30%","y":"15%"}'>• Botão: Ver Todos</span>
-              <span class="sub-item" data-pos='{"x":"35%","y":"15%"}'>• Filtro: Pendentes</span>
-              <span class="sub-item" data-pos='{"x":"42%","y":"15%"}'>• Filtro: Executando</span>
-              <span class="sub-item" data-pos='{"x":"75%","y":"15%"}'>• Botão: Nova Devolução</span>
-              <span class="sub-item" data-pos='{"x":"82%","y":"15%"}'>• Importar CRN (Lote)</span>
-              <span class="sub-item" data-pos='{"x":"89%","y":"15%"}'>• Executar Triagem</span>
-            </div>
-          </div>
-
-          <div class="accordion-item" data-id="header-table">
-            <div class="accordion-header"><span class="step-num">2</span> Cabeçalho e Seleção Global</div>
-            <div class="accordion-content">
-              Utilize o Checkbox mestre para ações em massa.
-              <span class="sub-item" data-pos='{"x":"5%","y":"25%"}'>• Seleção Global</span>
-            </div>
-          </div>
-
-          <div class="accordion-item" data-id="rows">
-            <div class="accordion-header"><span class="step-num">3</span> Linhas e Registros</div>
-            <div class="accordion-content">
-              Interações diretas com cada processo de devolução.
-              <span class="sub-item" data-pos='{"x":"50%","y":"35%"}'>• Corpo da Linha (Foco)</span>
-              <span class="sub-item" data-pos='{"x":"5%","y":"35%"}'>• Checkbox Individual</span>
-              <span class="sub-item" data-pos='{"x":"95%","y":"35%"}'>• Expandir Detalhes (Chevron)</span>
-            </div>
-          </div>
-
-          <div class="accordion-item" data-id="triagem">
-            <div class="accordion-header"><span class="step-num">4</span> Triagem e Destinos</div>
-            <div class="accordion-content">
-              Definição técnica da condição do produto e seu destino físico.
-              <span class="sub-item" data-pos='{"x":"70%","y":"50%"}'>• Estado da Peça (Grade)</span>
-              <span class="sub-item" data-pos='{"x":"85%","y":"50%"}'>• Setor de Destino (Logística)</span>
-            </div>
-          </div>
-
-          <div class="accordion-item" data-id="modals">
-            <div class="accordion-header"><span class="step-num">5</span> Modais e Alertas</div>
-            <div class="accordion-content">
-              Janelas de confirmação e avisos de sistema (Toasts).
-              <span class="sub-item" data-pos='{"x":"50%","y":"50%"}'>• Modal Nova Devolução</span>
-              <span class="sub-item" data-pos='{"x":"60%","y":"55%"}'>• Confirmação de Cancelamento</span>
-              <span class="sub-item" data-pos='{"x":"90%","y":"10%"}'>• Fechar Alerta (Toast)</span>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Coluna Direita: Prática -->
+        <!-- TOPO: Imagem do Sistema com Ghost Cursor -->
         <div class="visual-preview">
           <div class="image-container">
             <img src="../../assets/img/screenshots/2.2 Processar Devoluções.png" class="main-screenshot" alt="Interface Processar Devoluções">
-            
-            <div id="ghost-cursor" style="position:absolute; left: 50%; top: 50%; transition: all 0.5s ease;">
+            <div id="ghost-cursor" style="position:absolute; left:50%; top:50%; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 2L2 22L12 19L18 30L22 28L16 17L26 22L10 2Z" fill="#fbbf24" stroke="black" stroke-width="2"/>
               </svg>
             </div>
-            
-            <div class="marker" id="pulse-marker" style="position:absolute; left: 50%; top: 50%; opacity:0;"></div>
+            <div class="marker" id="pulse-marker" style="position:absolute; left:50%; top:50%; opacity:0;"></div>
           </div>
+        </div>
+
+        <!-- ABAIXO: Grid de Cards Interativos -->
+        <div class="accordion">
+
+          <!-- 1. Filtros de Status -->
+          <div class="accordion-item active" data-id="filtros">
+            <div class="accordion-header"><span class="step-num">1</span> Filtros de Status</div>
+            <div class="accordion-content">
+              Filtre a lista de devoluções pelo status da operação. Os contadores no canto direito atualizam em tempo real.
+              <span class="sub-item" data-pos='{"x":"27%","y":"36%"}'>• Todos</span>
+              <span class="sub-item" data-pos='{"x":"32%","y":"36%"}'>• Pendente</span>
+              <span class="sub-item" data-pos='{"x":"38%","y":"36%"}'>• Executando</span>
+              <span class="sub-item" data-pos='{"x":"43%","y":"36%"}'>• Cancelada</span>
+              <span class="sub-item" data-pos='{"x":"48%","y":"36%"}'>• Finalizada</span>
+            </div>
+          </div>
+
+          <!-- 2. Ações Principais -->
+          <div class="accordion-item" data-id="acoes">
+            <div class="accordion-header"><span class="step-num">2</span> Ações Principais</div>
+            <div class="accordion-content">
+              Botões de ação para criar, importar, executar e cancelar devoluções.
+              <span class="sub-item" data-pos='{"x":"57%","y":"36%"}'>• + Nova Devolução</span>
+              <span class="sub-item" data-pos='{"x":"73%","y":"36%"}'>• Importar CRN (Arquivo em Lote)</span>
+              <span class="sub-item" data-pos='{"x":"85%","y":"36%"}'>• Executar Devolução</span>
+              <span class="sub-item" data-pos='{"x":"95%","y":"36%"}'>• Cancelar Devolução</span>
+            </div>
+          </div>
+
+          <!-- 3. KPIs de Resumo -->
+          <div class="accordion-item" data-id="kpis">
+            <div class="accordion-header"><span class="step-num">3</span> KPIs de Resumo</div>
+            <div class="accordion-content">
+              Indicadores visuais de acompanhamento no canto superior direito da tela.
+              <span class="sub-item" data-pos='{"x":"82%","y":"28%"}'>• 2 Pendentes (Laranja)</span>
+              <span class="sub-item" data-pos='{"x":"87%","y":"28%"}'>• 1 Executando (Azul)</span>
+              <span class="sub-item" data-pos='{"x":"92%","y":"28%"}'>• 1 Finalizada (Verde)</span>
+              <span class="sub-item" data-pos='{"x":"97%","y":"28%"}'>• 1 Cancelada (Vermelho)</span>
+            </div>
+          </div>
+
+          <!-- 4. Cabeçalho da Tabela -->
+          <div class="accordion-item" data-id="cabecalho">
+            <div class="accordion-header"><span class="step-num">4</span> Cabeçalho da Tabela</div>
+            <div class="accordion-content">
+              As colunas da tabela organizam as informações essenciais de cada devolução.
+              <span class="sub-item" data-pos='{"x":"17%","y":"43%"}'>• Chevron: Expandir/Recolher</span>
+              <span class="sub-item" data-pos='{"x":"22%","y":"43%"}'>• ID Insucesso</span>
+              <span class="sub-item" data-pos='{"x":"33%","y":"43%"}'>• Data Solicitação</span>
+              <span class="sub-item" data-pos='{"x":"43%","y":"43%"}'>• Ordem de Cliente</span>
+              <span class="sub-item" data-pos='{"x":"55%","y":"43%"}'>• NF Original</span>
+              <span class="sub-item" data-pos='{"x":"64%","y":"43%"}'>• Tipo (Garantia, Insucesso, Comercial)</span>
+              <span class="sub-item" data-pos='{"x":"76%","y":"43%"}'>• Depositante</span>
+              <span class="sub-item" data-pos='{"x":"89%","y":"43%"}'>• Status (Badge Colorido)</span>
+            </div>
+          </div>
+
+          <!-- 5. Linhas da Tabela -->
+          <div class="accordion-item" data-id="linhas">
+            <div class="accordion-header"><span class="step-num">5</span> Linhas da Tabela (Registros)</div>
+            <div class="accordion-content">
+              Cada linha representa uma devolução ativa no sistema. Clique para selecionar e no chevron para expandir detalhes.
+              <span class="sub-item" data-pos='{"x":"50%","y":"48%"}'>• INS-2026-001 — Insucesso de Entrega (Pendente)</span>
+              <span class="sub-item" data-pos='{"x":"50%","y":"52%"}'>• INS-2026-002 — Garantia (Executando)</span>
+              <span class="sub-item" data-pos='{"x":"50%","y":"56%"}'>• INS-2026-003 — Devolução Comercial (Finalizada)</span>
+              <span class="sub-item" data-pos='{"x":"50%","y":"59%"}'>• INS-2026-004 — Insucesso de Entrega (Pendente)</span>
+              <span class="sub-item" data-pos='{"x":"50%","y":"63%"}'>• INS-2026-005 — Insucesso de Entrega (Cancelada)</span>
+            </div>
+          </div>
+
+          <!-- 6. Legenda de Status -->
+          <div class="accordion-item" data-id="legenda">
+            <div class="accordion-header"><span class="step-num">6</span> Legenda e Fluxo</div>
+            <div class="accordion-content">
+              A barra inferior exibe a legenda de status e o aviso operacional de triagem.
+              <span class="sub-item" data-pos='{"x":"20%","y":"68%"}'>• Badge: Pendente (Laranja)</span>
+              <span class="sub-item" data-pos='{"x":"25%","y":"68%"}'>• Badge: Executando (Azul)</span>
+              <span class="sub-item" data-pos='{"x":"30%","y":"68%"}'>• Badge: Cancelada (Vermelho)</span>
+              <span class="sub-item" data-pos='{"x":"35%","y":"68%"}'>• Badge: Finalizada (Verde)</span>
+              <span class="sub-item" data-pos='{"x":"55%","y":"72%"}'>• Aviso de Triagem (Peças Avariadas/Desmembradas)</span>
+            </div>
+          </div>
+
+          <!-- 7. Triagem -->
+          <div class="accordion-item" data-id="triagem">
+            <div class="accordion-header"><span class="step-num">7</span> Triagem de Peças</div>
+            <div class="accordion-content">
+              Ao expandir uma linha com o chevron, o painel de triagem aparece. Nele, cada item da devolução recebe classificação.
+              <span class="sub-item" data-pos='{"x":"65%","y":"55%"}'>• Select: Estado da Peça (Bom/Avariado/Desmembrado)</span>
+              <span class="sub-item" data-pos='{"x":"80%","y":"55%"}'>• Select: Setor de Destino (Estoque/Avarias/Reposição)</span>
+            </div>
+          </div>
+
+          <!-- 8. Modais -->
+          <div class="accordion-item" data-id="modais">
+            <div class="accordion-header"><span class="step-num">8</span> Modais e Confirmações</div>
+            <div class="accordion-content">
+              Modais de ação que exigem confirmação do operador antes de finalizar.
+              <span class="sub-item" data-pos='{"x":"50%","y":"50%"}'>• Modal: Nova Devolução (OC, NF, Depositante)</span>
+              <span class="sub-item" data-pos='{"x":"50%","y":"55%"}'>• Modal: Confirmar Cancelamento</span>
+              <span class="sub-item" data-pos='{"x":"90%","y":"15%"}'>• Toast: Notificação de Sucesso/Erro</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -126,28 +197,37 @@
   const items = document.querySelectorAll('.accordion-item');
   const subItems = document.querySelectorAll('.sub-item');
 
+  // Default positions for each section
+  const sectionDefaults = {
+    'filtros':   { x: '35%', y: '36%' },
+    'acoes':     { x: '70%', y: '36%' },
+    'kpis':      { x: '90%', y: '28%' },
+    'cabecalho': { x: '50%', y: '43%' },
+    'linhas':    { x: '50%', y: '55%' },
+    'legenda':   { x: '30%', y: '68%' },
+    'triagem':   { x: '70%', y: '55%' },
+    'modais':    { x: '50%', y: '50%' },
+  };
+
   function moveCursor(x, y) {
     cursor.style.left = x;
     cursor.style.top = y;
     marker.style.left = x;
     marker.style.top = y;
     marker.style.opacity = '1';
-    
-    cursor.style.transform = 'scale(0.8)';
-    setTimeout(() => { cursor.style.transform = 'scale(1)'; }, 200);
+    cursor.style.transform = 'scale(0.75)';
+    setTimeout(() => { cursor.style.transform = 'scale(1)'; }, 250);
   }
 
   items.forEach(item => {
     item.addEventListener('click', () => {
+      const wasActive = item.classList.contains('active');
       items.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      
-      // Default position for the group
-      if(item.dataset.id === 'toolbar') moveCursor('30%', '15%');
-      if(item.dataset.id === 'header-table') moveCursor('5%', '25%');
-      if(item.dataset.id === 'rows') moveCursor('50%', '35%');
-      if(item.dataset.id === 'triagem') moveCursor('77%', '50%');
-      if(item.dataset.id === 'modals') moveCursor('50%', '50%');
+      if (!wasActive) {
+        item.classList.add('active');
+        const pos = sectionDefaults[item.dataset.id];
+        if (pos) moveCursor(pos.x, pos.y);
+      }
     });
   });
 

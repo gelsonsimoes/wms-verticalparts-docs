@@ -13,11 +13,18 @@
     .sidebar { background: #0f172a; border-right: 1px solid #1e293b; }
     .content { background: #0f172a; }
     .tutorial-card { background: #1e293b; color: #e2e8f0; border: 1px solid #334155; }
-    .tutorial-card h3 { color: #fbbf24; border-left-color: #fbbf24; }
-    .accordion-item { background: #0f172a; border-color: #334155; }
-    .accordion-header { color: #f1f5f9; }
-    .accordion-content { color: #94a3b8; }
-    .accordion-item.active { border-color: #fbbf24; }
+    .tutorial-card > h3 { color: #fbbf24; border-left-color: #fbbf24; }
+    .sub-item { 
+      padding: 8px 12px; cursor: pointer; border-radius: 8px; 
+      transition: 0.25s; display: block; margin-top: 6px; 
+      background: rgba(255,255,255,0.03); border: 1px solid transparent;
+      font-size: 0.9rem;
+    }
+    .sub-item:hover { 
+      background: rgba(251, 191, 36, 0.12); color: #fbbf24; 
+      border-color: rgba(251, 191, 36, 0.3);
+      transform: translateX(5px);
+    }
   </style>
 </head>
 <body>
@@ -30,79 +37,180 @@
 </header>
 <div class="layout">
   <nav class="sidebar">
+    <div class="group-title">Principal</div>
+    <a href="../../paginas/01-principal/dashboard.html">1.1 Dashboard Geral</a>
     <div class="group-title">Operar</div>
-    <a href="cruzar-docas.html" class="active">2.1 Cruzar Docas</a>
-    <!-- Outros itens seriam automáticos aqui -->
+    <a href="cruzar-docas-interativo.html" class="active">2.1 Cruzar Docas</a>
+    <a href="devolucoes-interativo.html">2.2 Processar Devoluções</a>
+    <a href="pesar-cargas.html">2.3 Pesar Cargas</a>
+    <a href="recebimento.html">2.4 Gerenciar Recebimento</a>
+    <a href="conferir-recebimento.html">2.5 Conferir Recebimento</a>
+    <a href="mapa-alocacao.html">2.6 Gerar Mapa de Alocação</a>
+    <a href="conferencia-cega.html">2.7 Conferência Cega</a>
+    <a href="alocar-estoque.html">2.8 Alocar Estoque</a>
+    <a href="kanban.html">2.9 Kanban de Alocação</a>
+    <a href="separar-pedidos.html">2.10 Separar Pedidos</a>
+    <a href="embalar.html">2.11 Embalar Pedidos</a>
+    <a href="saida.html">2.12 Monitorar Saída</a>
+    <a href="checkin.html">2.13 Check-in Recebimento</a>
+    <a href="kits.html">2.14 Estação de Kits</a>
+    <a href="colmeia.html">2.15 Conferência Colmeia</a>
+    <a href="mapa-visual.html">2.16 Mapa Visual Estoque</a>
+    <a href="buffer1.html">2.17 Buffer 1</a>
+    <a href="buffer2.html">2.18 Buffer 2</a>
+    <a href="ordem-servico.html">2.19 Ordem de Serviço</a>
+    <a href="seguros.html">2.20 Gestão de Seguros</a>
+    <a href="pesagem-rodoviaria.html">2.21 Pesagem Rodoviária</a>
   </nav>
   <main class="content">
     <div class="tutorial-card">
-      <div class="breadcrumb" style="color: #64748b;">Manual Interativo > Operação</div>
+      <div class="breadcrumb" style="color: #64748b; margin-bottom: 10px;">Manual Interativo > Operação > Cross-Docking</div>
       <h3 style="font-weight: 900; letter-spacing: -1px; font-size: 2.5rem;">2.1 CRUZAR DOCAS — AULA INTERATIVA</h3>
-      <p style="font-size: 1.1rem; opacity: 0.8;">Passe o mouse sobre os tópicos à esquerda para ver a ação simulada na tela do sistema à direita.</p>
+      <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 2rem;">Explore cada área da tela passando o mouse nos tópicos abaixo. O cursor dourado simulará a ação correspondente na imagem.</p>
       
       <div class="tutorial-grid">
-        <!-- Coluna Esquerda: Teoria -->
-        <div class="accordion">
-          <div class="accordion-item active" data-id="que-e">
-            <div class="accordion-header"><span class="step-num">1</span> O que é Cruzar Docas?</div>
-            <div class="accordion-content">O Cross-Docking é uma estratégica logística onde as mercadorias chegam na doca de entrada e vão direto para a doca de saída, sem passar pela armazenagem.</div>
-          </div>
-          
-          <div class="accordion-item" data-id="modo-tv">
-            <div class="accordion-header"><span class="step-num">2</span> Alternar Modo TV</div>
-            <div class="accordion-content">Otimiza a interface para monitores de galpão. Aumenta fontes e foca nos KPIs de SLA para visibilidade à distância.</div>
-          </div>
-
-          <div class="accordion-item" data-id="filtros">
-            <div class="accordion-header"><span class="step-num">3</span> Filtros de Status</div>
-            <div class="accordion-content">Alterne entre notas 'Pendentes' (em operação), 'Processadas' ou 'Canceladas' para organizar sua fila.</div>
-          </div>
-
-          <div class="accordion-item" data-id="tabela">
-            <div class="accordion-header"><span class="step-num">4</span> Linhas da Tabela (NFs)</div>
-            <div class="accordion-content">Acompanhe o progresso de Alocação (Amarelo) e Expedição (Verde). Clique na linha para abrir os detalhes.</div>
-          </div>
-
-          <div class="accordion-item" data-id="rota-sim">
-            <div class="accordion-header"><span class="step-num">5</span> Rota Expressa (Sim)</div>
-            <div class="accordion-content">Confirma fluxo direto para o cliente final. O sistema gera o manifesto de transbordo imediato.</div>
-          </div>
-
-          <div class="accordion-item" data-id="rota-nao">
-            <div class="accordion-header"><span class="step-num">6</span> Rota Expressa (Não)</div>
-            <div class="accordion-content">Utilize se o item precisar de armazenamento ou seguir fluxo normal de expedição futura.</div>
-          </div>
-
-          <div class="accordion-item" data-id="imprimir">
-            <div class="accordion-header"><span class="step-num">7</span> Imprimir Manifesto</div>
-            <div class="accordion-content">Gera o documento físico para o motorista após concluir a conferência física do transbordo.</div>
-          </div>
-
-          <div class="accordion-item" data-id="detalhes">
-            <div class="accordion-header"><span class="step-num">8</span> Fechar Detalhes</div>
-            <div class="accordion-content">Recolhe o painel inferior para ganhar mais área visual na lista principal.</div>
-          </div>
-        </div>
-
-        <!-- Coluna Direita: Prática -->
+        <!-- TOPO: Imagem do Sistema -->
         <div class="visual-preview">
           <div class="image-container">
             <img src="../../assets/img/screenshots/2.1 Cruzar Docas .png" class="main-screenshot" alt="Interface Cruzar Docas">
-            
-            <!-- Mouse Fantasma -->
-            <div id="ghost-cursor" style="left: 50%; top: 50%;">
+            <div id="ghost-cursor" style="position:absolute; left:50%; top:50%; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 2L2 22L12 19L18 30L22 28L16 17L26 22L10 2Z" fill="#fbbf24" stroke="black" stroke-width="2"/>
               </svg>
             </div>
-            
-            <div class="marker" style="left: 50%; top: 50%;"></div>
+            <div class="marker" id="pulse-marker" style="position:absolute; left:50%; top:50%; opacity:0;"></div>
           </div>
+        </div>
+
+        <!-- ABAIXO: Grid de Cards -->
+        <div class="accordion">
+
+          <div class="accordion-item active" data-id="conceito">
+            <div class="accordion-header"><span class="step-num">1</span> O que é Cruzar Docas?</div>
+            <div class="accordion-content">
+              O Cross-Docking é uma estratégia logística onde as mercadorias chegam na doca de entrada e vão direto para a doca de saída, sem passar pela armazenagem convencional.
+              <span class="sub-item" data-pos='{"x":"50%","y":"25%"}'>• Título da Página (Fluxo de Transbordo)</span>
+              <span class="sub-item" data-pos='{"x":"50%","y":"20%"}'>• Subtítulo: Monitoramento Ágil</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-id="modo-tv">
+            <div class="accordion-header"><span class="step-num">2</span> Modo TV (Mirroring)</div>
+            <div class="accordion-content">
+              Otimiza a interface para monitores de galpão. Aumenta fontes, remove distrações e foca nos KPIs de SLA Crítico para visibilidade à distância.
+              <span class="sub-item" data-pos='{"x":"74%","y":"20%"}'>• Botão MODO TV</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-id="filtros">
+            <div class="accordion-header"><span class="step-num">3</span> Filtros de Status</div>
+            <div class="accordion-content">
+              Alterne rapidamente entre notas Pendentes, Processadas ou Canceladas.
+              <span class="sub-item" data-pos='{"x":"82%","y":"20%"}'>• PENDENTE (Ativo, Amarelo)</span>
+              <span class="sub-item" data-pos='{"x":"89%","y":"20%"}'>• PROCESSADA</span>
+              <span class="sub-item" data-pos='{"x":"96%","y":"20%"}'>• CANCELADA</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-id="tabela">
+            <div class="accordion-header"><span class="step-num">4</span> Tabela de Notas Fiscais</div>
+            <div class="accordion-content">
+              Lista de NFs em fluxo de transbordo. Mostra progresso de Alocação e Expedição em tempo real.
+              <span class="sub-item" data-pos='{"x":"22%","y":"37%"}'>• NF-10292 (Linha 1)</span>
+              <span class="sub-item" data-pos='{"x":"22%","y":"42%"}'>• NF-10295 (Linha 2)</span>
+              <span class="sub-item" data-pos='{"x":"55%","y":"37%"}'>• Barra de Alocação (Amarela)</span>
+              <span class="sub-item" data-pos='{"x":"65%","y":"37%"}'>• Barra de Expedição (Verde)</span>
+              <span class="sub-item" data-pos='{"x":"85%","y":"42%"}'>• Nº Coleta: COL-882</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-id="rota-expressa">
+            <div class="accordion-header"><span class="step-num">5</span> Rota Expressa (Sim/Não)</div>
+            <div class="accordion-content">
+              Validação inteligente de transbordo direto para o cliente final.
+              <span class="sub-item" data-pos='{"x":"75%","y":"80%"}'>• Rota Expressa: SIM — Manifesto imediato</span>
+              <span class="sub-item" data-pos='{"x":"85%","y":"80%"}'>• Rota Expressa: NÃO — Buffer temporário</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-id="conferencia">
+            <div class="accordion-header"><span class="step-num">6</span> Conferência e Detalhes</div>
+            <div class="accordion-content">
+              Painel inferior que aparece ao clicar em uma NF. Mostra SKU, EAN e itens conferidos.
+              <span class="sub-item" data-pos='{"x":"50%","y":"70%"}'>• Painel de Detalhes Expandido</span>
+              <span class="sub-item" data-pos='{"x":"30%","y":"75%"}'>• Coluna: SKU e EAN do Produto</span>
+              <span class="sub-item" data-pos='{"x":"60%","y":"75%"}'>• Solicitado vs Atendido</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-id="imprimir">
+            <div class="accordion-header"><span class="step-num">7</span> Imprimir Manifesto</div>
+            <div class="accordion-content">
+              Gera o documento físico necessário para o motorista após a conferência física do transbordo.
+              <span class="sub-item" data-pos='{"x":"90%","y":"90%"}'>• Botão Imprimir (Canto Inferior)</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-id="fechar">
+            <div class="accordion-header"><span class="step-num">8</span> Fechar Detalhes</div>
+            <div class="accordion-content">
+              Recolhe o painel inferior para dar mais espaço à lista principal de monitoramento de docas.
+              <span class="sub-item" data-pos='{"x":"96%","y":"65%"}'>• Botão Fechar (X)</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </main>
 </div>
-<script src="../../assets/js/tutorial.js"></script>
+
+<script>
+  const cursor = document.getElementById('ghost-cursor');
+  const marker = document.getElementById('pulse-marker');
+  const items = document.querySelectorAll('.accordion-item');
+  const subItems = document.querySelectorAll('.sub-item');
+
+  const sectionDefaults = {
+    'conceito':      { x: '50%', y: '25%' },
+    'modo-tv':       { x: '74%', y: '20%' },
+    'filtros':       { x: '85%', y: '20%' },
+    'tabela':        { x: '50%', y: '37%' },
+    'rota-expressa': { x: '80%', y: '80%' },
+    'conferencia':   { x: '50%', y: '70%' },
+    'imprimir':      { x: '90%', y: '90%' },
+    'fechar':        { x: '96%', y: '65%' },
+  };
+
+  function moveCursor(x, y) {
+    cursor.style.left = x;
+    cursor.style.top = y;
+    marker.style.left = x;
+    marker.style.top = y;
+    marker.style.opacity = '1';
+    cursor.style.transform = 'scale(0.75)';
+    setTimeout(() => { cursor.style.transform = 'scale(1)'; }, 250);
+  }
+
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const wasActive = item.classList.contains('active');
+      items.forEach(i => i.classList.remove('active'));
+      if (!wasActive) {
+        item.classList.add('active');
+        const pos = sectionDefaults[item.dataset.id];
+        if (pos) moveCursor(pos.x, pos.y);
+      }
+    });
+  });
+
+  subItems.forEach(sub => {
+    sub.addEventListener('mouseenter', (e) => {
+      const pos = JSON.parse(sub.dataset.pos);
+      moveCursor(pos.x, pos.y);
+      e.stopPropagation();
+    });
+  });
+</script>
 </body>
 </html>
