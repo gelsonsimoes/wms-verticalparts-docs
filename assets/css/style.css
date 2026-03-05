@@ -93,6 +93,7 @@ body {
 .layout {
   display: flex;
   min-height: calc(100vh - var(--header-h));
+  max-width: 100%;
 }
 
 .sidebar {
