@@ -99,6 +99,7 @@ sections = [
     }
 ]
 
+# Sidebar helper
 def get_sidebar_html(rel):
     sb = ""
     for sec in sections:
@@ -107,52 +108,89 @@ def get_sidebar_html(rel):
             sb += f'    <a href="{rel}{p}{f}">{t}</a>\n'
     return sb
 
-def get_html(title, depth=2):
-    rel = "../../" if depth == 2 else ""
-    return f"""<!DOCTYPE html>
+# Update index.html
+index_nav = ""
+for sec in sections:
+    for f, t, p in sec["items"][:1]: # Show first of each section as card
+        # Map icon
+        icon = "📦"
+        if sec["name"] == "Operar": icon = "📥"
+        elif sec["name"] == "Planejar": icon = "📋"
+        elif sec["name"] == "Controlar": icon = "📊"
+        elif sec["name"] == "Fiscal": icon = "🧾"
+        elif sec["name"] == "Financeiro": icon = "💰"
+        elif sec["name"] == "Cadastrar": icon = "🗂️"
+        
+        index_nav += f'''      <a class="nav-card" href="{p}{f}">
+        <div class="icon">{icon}</div>
+        <h4>{sec["name"]}</h4>
+        <p>Acesse os tutoriais do módulo {sec["name"].lower()}.</p>
+      </a>\n'''
+
+# We won't regenerate everything if it exists and has custom content, 
+# but for now let's just create the specialized Cruzar Docas page.
+
+# Special page Cruzar Docas
+cruzar_docas_content = """<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{title} — WMS VerticalParts Docs</title>
-  <link rel="stylesheet" href="{rel}assets/css/style.css">
+  <title>2.1 Cruzar Docas — WMS VerticalParts Docs</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
 <header class="site-header">
   <div class="logo">VerticalParts <span>WMS Docs</span></div>
   <nav>
-    <a href="{rel}index.html">Início</a>
-    <a href="{rel}paginas/02-operar/recebimento.html">Operação</a>
-    <a href="{rel}paginas/mobile/login.html">Mobile</a>
+    <a href="../../index.html">Início</a>
+    <a href="../02-operar/recebimento.html">Operação</a>
+    <a href="../mobile/login.html">Mobile</a>
     <a href="https://www.wmsverticalparts.com.br" target="_blank">Site Oficial</a>
   </nav>
 </header>
 <div class="layout">
   <nav class="sidebar">
-{get_sidebar_html(rel)}
+""" + get_sidebar_html("../../") + """
   </nav>
   <main class="content">
     <div class="tutorial-card">
-      <h3>{title} — Manual do Usuário</h3>
-      <p>Esta página descreve as funcionalidades e o fluxo de operação do módulo <strong>{title}</strong>.</p>
+      <div class="breadcrumb">Operação > Transbordo Móvel</div>
+      <h3>2.1 Cruzar Docas — Manual do Usuário</h3>
+      <p>O módulo de <strong>Cruzar Docas (Cross-Docking)</strong> permite o monitoramento em tempo real do fluxo de transbordo, onde mercadorias recém-recebidas são enviadas diretamente para a expedição sem passar pela armazenagem convencional.</p>
+      
       <div class="demo-wrap">
         <div class="demo-label">Demonstração Visual</div>
-        <div style="background: #f8f9fa; height: 300px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: #adb5bd; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">
-           Aguardando GIF Demonstrativo
+        <img src="../../assets/img/screenshots/2.1 Cruzar Docas .png" alt="Tela de Cruzar Docas" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); border: 1px solid #ddd;">
+      </div>
+
+      <div class="features-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+        <div class="f-item" style="background: #fff8e1; p: 20px; border-radius: 15px; border-left: 5px solid #ffb300; padding: 15px;">
+           <strong style="color: #ffb300;">📺 Modo TV (Mirroring)</strong>
+           <p style="font-size: 13px; margin: 5px 0;">Painel otimizado para monitores de galpão com KPIs de SLA Crítico e notas processadas.</p>
+        </div>
+        <div class="f-item" style="background: #e8f5e9; p: 20px; border-radius: 15px; border-left: 5px solid #43a047; padding: 15px;">
+           <strong style="color: #43a047;">⚡ Rota Expressa</strong>
+           <p style="font-size: 13px; margin: 5px 0;">Validação inteligente de transbordo direto para o cliente final.</p>
         </div>
       </div>
-      <h2>Fluxo de Trabalho</h2>
+
+      <h2>Como Operar este Módulo</h2>
       <ul class="steps">
-        <li>Acesse o menu lateral e clique em <strong>{title}</strong>.</li>
-        <li>Utilize os filtros de pesquisa para localizar os registros desejados.</li>
-        <li>Realize a operação conforme as regras de negócio da VerticalParts.</li>
-        <li>Confirme as alterações para sincronizar com o WMS Central.</li>
+        <li><strong>Filtragem de Status:</strong> Utilize os botões no topo para alternar entre notas <em>Pendentes</em>, <em>Processadas</em> ou <em>Canceladas</em>.</li>
+        <li><strong>Monitoramento de Alocação:</strong> Acompanhe a barra <strong>Alocada</strong> (黄) para saber quanto do volume já foi separado para transbordo.</li>
+        <li><strong>Acompanhamento de Expedição:</strong> A barra <strong>Expedida</strong> (绿) indica o que já foi efetivamente carregado no veículo.</li>
+        <li><strong>Detalhamento da NF:</strong> Clique em uma linha para abrir o painel inferior. Lá você verá o SKU, EAN e a conferência de itens (Solicitado vs Atendido).</li>
+        <li><strong>Validação de Rota:</strong> No painel de detalhes, confirme se a carga seguirá via <strong>Rota Expressa</strong> para entrega direta.</li>
+        <li><strong>Manifesto:</strong> Após a conferência total, utilize o botão <strong>Imprimir Manifesto</strong> para liberar o veículo.</li>
       </ul>
+
       <div class="tip">
-        <strong>💡 Dica:</strong> Todas as alterações nesta tela são auditadas e registradas no log de atividades do sistema.
+        <strong>💡 Insight Logístico:</strong> Fique atento ao KPI de "SLA Crítico" no Modo TV. Ele indica NFs pendentes com alocação incompleta que precisam de atenção imediata.
       </div>
+
       <div class="result">
-        <strong>✓ Próximo Passo:</strong> Consulte o módulo relacionado para dar continuidade ao fluxo logístico.
+        <strong>✓ Conclusão:</strong> Uma NF é considerada "Processada" quando as barras de Alocação e Expedição atingem 100% e o fluxo operacional é validado.
       </div>
     </div>
   </main>
@@ -160,19 +198,13 @@ def get_html(title, depth=2):
 <footer>
   <p>WMS VerticalParts Docs — Atualizado a cada versão — <a href="https://www.wmsverticalparts.com.br" target="_blank">wmsverticalparts.com.br</a></p>
 </footer>
-<script src="{rel}assets/js/main.js"></script>
+<script src="../../assets/js/main.js"></script>
 </body>
 </html>
 """
 
-# Regenerate all pages (except specialized ones later)
-for section in sections:
-    for item_file, item_title, folder in section["items"]:
-        full_path = os.path.join(base_dir, folder, item_file)
-        os.makedirs(os.path.dirname(full_path), exist_ok=True)
-        # Skip if it's the specialized one we just made or will make
-        if item_file == "cruzar-docas.html": continue 
-        with open(full_path, 'w', encoding='utf-8') as f:
-            f.write(get_html(item_title))
+# Write the special page
+with open(os.path.join(base_dir, "paginas/02-operar/cruzar-docas.html"), "w", encoding="utf-8") as f:
+    f.write(cruzar_docas_content)
 
-print("Document generation complete with new numbering.")
+print("Specialized Cruzar Docas page created.")
