@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2.1 Tutorial Interativo — Cruzar Docas</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/interactive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #0f172a; color: white; }
+    .site-header { background: #0f172a; border-bottom: 1px solid #1e293b; }
+    .sidebar { background: #0f172a; border-right: 1px solid #1e293b; }
+    .content { background: #0f172a; }
+    .tutorial-card { background: #1e293b; color: #e2e8f0; border: 1px solid #334155; }
+    .tutorial-card h3 { color: #fbbf24; border-left-color: #fbbf24; }
+    .accordion-item { background: #0f172a; border-color: #334155; }
+    .accordion-header { color: #f1f5f9; }
+    .accordion-content { color: #94a3b8; }
+    .accordion-item.active { border-color: #fbbf24; }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="logo">VerticalParts <span>WMS Docs</span></div>
+  <nav>
+    <a href="../../index.html">Início</a>
+    <a href="https://www.wmsverticalparts.com.br" target="_blank">Site Oficial</a>
+  </nav>
+</header>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="group-title">Operar</div>
+    <a href="cruzar-docas.html" class="active">2.1 Cruzar Docas</a>
+    <!-- Outros itens seriam automáticos aqui -->
+  </nav>
+  <main class="content">
+    <div class="tutorial-card">
+      <div class="breadcrumb" style="color: #64748b;">Manual Interativo > Operação</div>
+      <h3 style="font-weight: 900; letter-spacing: -1px; font-size: 2.5rem;">2.1 CRUZAR DOCAS — AULA INTERATIVA</h3>
+      <p style="font-size: 1.1rem; opacity: 0.8;">Passe o mouse sobre os tópicos à esquerda para ver a ação simulada na tela do sistema à direita.</p>
+      
+      <div class="tutorial-grid">
+        <!-- Coluna Esquerda: Teoria -->
+        <div class="accordion">
+          <div class="accordion-item active" data-id="que-e">
+            <div class="accordion-header"><span class="step-num">1</span> O que é Cruzar Docas?</div>
+            <div class="accordion-content">O Cross-Docking é uma estratégica logística onde as mercadorias chegam na doca de entrada e vão direto para a doca de saída, sem passar pela armazenagem.</div>
+          </div>
+          
+          <div class="accordion-item" data-id="modo-tv">
+            <div class="accordion-header"><span class="step-num">2</span> Alternar Modo TV</div>
+            <div class="accordion-content">Otimiza a interface para monitores de galpão. Aumenta fontes e foca nos KPIs de SLA para visibilidade à distância.</div>
+          </div>
+
+          <div class="accordion-item" data-id="filtros">
+            <div class="accordion-header"><span class="step-num">3</span> Filtros de Status</div>
+            <div class="accordion-content">Alterne entre notas 'Pendentes' (em operação), 'Processadas' ou 'Canceladas' para organizar sua fila.</div>
+          </div>
+
+          <div class="accordion-item" data-id="tabela">
+            <div class="accordion-header"><span class="step-num">4</span> Linhas da Tabela (NFs)</div>
+            <div class="accordion-content">Acompanhe o progresso de Alocação (Amarelo) e Expedição (Verde). Clique na linha para abrir os detalhes.</div>
+          </div>
+
+          <div class="accordion-item" data-id="rota-sim">
+            <div class="accordion-header"><span class="step-num">5</span> Rota Expressa (Sim)</div>
+            <div class="accordion-content">Confirma fluxo direto para o cliente final. O sistema gera o manifesto de transbordo imediato.</div>
+          </div>
+
+          <div class="accordion-item" data-id="rota-nao">
+            <div class="accordion-header"><span class="step-num">6</span> Rota Expressa (Não)</div>
+            <div class="accordion-content">Utilize se o item precisar de armazenamento ou seguir fluxo normal de expedição futura.</div>
+          </div>
+
+          <div class="accordion-item" data-id="imprimir">
+            <div class="accordion-header"><span class="step-num">7</span> Imprimir Manifesto</div>
+            <div class="accordion-content">Gera o documento físico para o motorista após concluir a conferência física do transbordo.</div>
+          </div>
+
+          <div class="accordion-item" data-id="detalhes">
+            <div class="accordion-header"><span class="step-num">8</span> Fechar Detalhes</div>
+            <div class="accordion-content">Recolhe o painel inferior para ganhar mais área visual na lista principal.</div>
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Prática -->
+        <div class="visual-preview">
+          <div class="image-container">
+            <img src="../../assets/img/screenshots/2.1 Cruzar Docas .png" class="main-screenshot" alt="Interface Cruzar Docas">
+            
+            <!-- Mouse Fantasma -->
+            <div id="ghost-cursor" style="left: 50%; top: 50%;">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 2L2 22L12 19L18 30L22 28L16 17L26 22L10 2Z" fill="#fbbf24" stroke="black" stroke-width="2"/>
+              </svg>
+            </div>
+            
+            <div class="marker" style="left: 50%; top: 50%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../../assets/js/tutorial.js"></script>
+</body>
+</html>
